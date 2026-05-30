@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>VibeCode — AI Trio IDE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header -->
+    <header id="header">
+      <div class="logo">
+        <span class="logo-icon">⟨/⟩</span>
+        <span class="logo-text">VibeCode</span>
+      </div>
+      <div class="header-right">
+        <div id="status-dot" class="dot idle"></div>
+        <span id="status-text">Ready</span>
+      </div>
+    </header>
+
+    <!-- Tab Bar -->
+    <nav id="tabs">
+      <button class="tab active" data-tab="chat">🤖 Agents</button>
+      <button class="tab" data-tab="editor">📝 Editor</button>
+      <button class="tab" data-tab="output">📤 Output</button>
+    </nav>
+
+    <!-- CHAT TAB -->
+    <div id="tab-chat" class="tab-content active">
+
+      <!-- Agent Cards -->
+      <div id="agents-row">
+        <div class="agent-card" id="card-prompt_engineer">
+          <div class="agent-avatar">🎯</div>
+          <div class="agent-info">
+            <div class="agent-name">Prometheus</div>
+            <div class="agent-role">Prompt Engineer</div>
+            <div class="agent-model">llama-3.1-405b</div>
+          </div>
+          <div class="agent-status-ring idle"></div>
+        </div>
+        <div class="agent-card" id="card-coder">
+          <div class="agent-avatar">⚙️</div>
+          <div class="agent-info">
+            <div class="agent-name">Forge</div>
+            <div class="agent-role">Coder</div>
+            <div class="agent-model">qwen2.5-coder-32b</div>
+          </div>
+          <div class="agent-status-ring idle"></div>
+        </div>
+        <div class="agent-card" id="card-reviewer">
+          <div class="agent-avatar">🔍</div>
+          <div class="agent-info">
+            <div class="agent-name">Aegis</div>
+            <div class="agent-role">Reviewer</div>
+            <div class="agent-model">nemotron-70b</div>
+          </div>
+          <div class="agent-status-ring idle"></div>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div id="messages"></div>
+
+      <!-- Input -->
+      <div id="input-area">
+        <textarea id="prompt-input" placeholder="Describe what you want to build..." rows="3"></textarea>
+        <button id="send-btn" onclick="sendPrompt()">
+          <span id="send-icon">▶</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- EDITOR TAB -->
+    <div id="tab-editor" class="tab-content">
+      <div id="editor-toolbar">
+        <select id="lang-select" onchange="changeLanguage()">
+          <option value="javascript">JavaScript</option>
+          <option value="python">Python</option>
+          <option value="htmlmixed">HTML</option>
+          <option value="css">CSS</option>
+        </select>
+        <button onclick="copyCode()" class="tool-btn">📋 Copy</button>
+        <button onclick="clearEditor()" class="tool-btn">🗑 Clear</button>
+      </div>
+      <textarea id="code-editor"></textarea>
+    </div>
+
+    <!-- OUTPUT TAB -->
+    <div id="tab-output" class="tab-content">
+      <div id="output-toolbar">
+        <button onclick="copyOutput()" class="tool-btn">📋 Copy</button>
+        <button onclick="clearOutput()" class="tool-btn">🗑 Clear</button>
+      </div>
+      <div id="output-content"></div>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
